@@ -1,0 +1,40 @@
+"""
+206. REVERSE LINKED LIST
+
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+"""
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        # Check if linked list is empty
+        if head is None:
+            return head
+        
+        list = [] # create list to save unlinked nodes from linked list
+        curr = head # current node starts at head of given linked list
+        
+        while curr is not None:
+            list.append(curr) # append current node to list
+            curr = curr.next # advance to next node of linked list
+            
+        prev = 0 # temporary value of previous node
+        # Link the saved nodes in list together
+        for node in reversed(list):
+            if node.next is None: 
+                prev = node
+                continue # skip this iteration since this node is the head
+            else: 
+                node.next = None # avoid creating a cycle/ doubly linked list
+                prev.next = node # link the node in reverse order
+                prev = prev.next # change prev  to hold current node for next iteration
+              
+        return list[len(list) - 1] # return the last element of list as the head
