@@ -1,0 +1,19 @@
+class Solution(object):
+    def reverseWords(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        reversedStr = "" # str to hold reversed words in string
+        
+        # Convert str of words separated by whitespace into list of words 
+        wordList = s.split()
+        
+        # Loop through each word in list
+        for word in wordList:
+            # Reverse word by swapping indices and adding to new str
+            for character in reversed(word):
+                reversedStr += character # concatenate char to reversed string
+            reversedStr += " "
+        
+        return(reversedStr.strip()) # remove trailing whitespace and return
