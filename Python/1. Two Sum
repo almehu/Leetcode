@@ -1,0 +1,15 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        
+        for firstIndice in range(len(nums)):
+            for secondIndice in range(firstIndice+1, len(nums)):
+                # Returns indices of nums if sum is equal to target
+                if nums[firstIndice] + nums[secondIndice] == target:
+                    return [firstIndice, secondIndice]
+        else:
+            print("Error: no combination of ints in nums array equal target")
