@@ -27,7 +27,7 @@ class Solution(object):
             curr = curr.next # advance to next node of linked list
             
         prev = 0 # temporary value of previous node
-        # Link the saved nodes in list together
+        # Loop through and link the saved nodes in list together
         for node in reversed(list):
             if node.next is None: 
                 prev = node
