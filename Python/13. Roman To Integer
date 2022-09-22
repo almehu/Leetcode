@@ -1,0 +1,41 @@
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        sum = 0
+        previous = 0
+        
+        for digit in reversed(s):
+            # Convert roman numeral digit into int and add to sum
+            digit = self.valueOf(digit)
+            
+            if previous > digit:
+                sum -= digit
+            else: 
+                sum += digit
+            previous = digit
+            
+        return sum
+            
+    def valueOf(self, digit):
+        # Converts a non-case sensitive single roman numeral digit to an int
+        if digit == "I":
+            convertedInt = 1 
+        elif digit == "V":
+            convertedInt = 5
+        elif digit == "X":
+            convertedInt = 10
+        elif digit == "L":
+            convertedInt = 50
+        elif digit == "C":
+            convertedInt = 100
+        elif digit == "D":
+            convertedInt = 500
+        elif digit == "M":
+            convertedInt = 1000
+        else:
+            print("Error: roman numeral {} not recognized".format(digit))
+        
+        return convertedInt
