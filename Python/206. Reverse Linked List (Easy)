@@ -14,24 +14,16 @@ class Solution(object):
         """
         :type head: ListNode
         :rtype: ListNode
-        """
-        # Check if linked list is empty
-        if head is None:
-            return head
-        
+        """        
         curr = head # current node starts at head of given linked list
         prev = None # temporary value of previous node
         
         # Assuming that linked list is not a cycle, re-links them in place
         while curr is not None:
             next = curr.next # save next node in temp variable
-            
-            # Check if current node is the origial head
-            if curr == head: 
-                curr.next = None # make head the new tail of list
-            else:     
-                curr.next = prev # link to previous node
+            curr.next = prev # link to previous node
             prev = curr # save node as previous for next iteration
             curr = next # advance to next node of linked list
             
         return prev # return the last element of list as the head (prev holds last curr node from loop)
+    
