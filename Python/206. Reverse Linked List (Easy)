@@ -22,6 +22,7 @@ class Solution(object):
         curr = head # current node starts at head of given linked list
         prev = None # temporary value of previous node
         
+        # Assuming that linked list is not a cycle
         while curr is not None:
             next = curr.next # save next node in temp variable
             
