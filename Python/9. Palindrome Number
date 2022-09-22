@@ -1,0 +1,18 @@
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        #convert to string
+        num = str(x)
+        
+        # if odd, middle char is ignored
+        for frontIndice in range(len(num)/2):
+            endIndice = len(num) - 1 - frontIndice
+            
+            if num[frontIndice] != num[endIndice]:
+                return False
+            
+        # if loop completes without returning false, then x is palindrome
+        return True
