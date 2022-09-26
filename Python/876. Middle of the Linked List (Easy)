@@ -1,0 +1,23 @@
+"""
+876. MIDDLE OF THE LINKED LIST
+Given the head of a singly linked list, return the middle node of the linked list.
+
+If there are two middle nodes, return the second middle node.
+"""
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        leading_pointer = trailing_pointer = head
+        
+        # When leading_pointer reaches the end, trailing_pointer will hit the middle
+        while leading_pointer and leading_pointer.next:
+            trailing_pointer = trailing_pointer.next # 1 step at a time
+            leading_pointer = leading_pointer.next.next # 2 steps at a time
+        
+        # If list has an even length, trailing_pointer is len(List)/2 + 1
+        return trailing_pointer # return the node located in the middle of the lis
