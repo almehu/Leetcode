@@ -1,0 +1,20 @@
+"""
+217. CONTAINS DUPLICATE
+
+Given an integer array nums, return true if any value appears at least twice in the array, 
+and return false if every element is distinct.
+"""
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        encounteredInts = set() # set to hold all ints encountered in nums array
+        
+        for num in nums:
+            # Check if int exists in dict already
+            if num in encounteredInts:
+                return True; # return true if value appears at least twice
+            
+            encounteredInts.add(num) # add int to set
+            
+        return False # return false if value is not repeated in array
+    
