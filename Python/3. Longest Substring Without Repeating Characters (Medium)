@@ -1,0 +1,28 @@
+"""
+3. LONGEST SUBSTRING WIHTOUT REPEATING CHARACTERS
+
+Given a string s, find the length of the longest substring without repeating characters.
+"""
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        # Check if s is an empty string
+        if len(s) == 0:
+            return len(s)
+        
+        length = 1 # length of longest substring without repeated chars
+        
+        for firstChar in range(len(s)):
+            encounteredChars = {} # dict full of chars for that substring
+            encounteredChars[s[firstChar]] = 1 # add char to dict
+            
+            # Shift through substrings and check lengths
+            for secondChar in range(firstChar + 1, len(s)):
+                # Check if char is a repeated char in substring
+                if encounteredChars.get(s[secondChar]):
+                    break # shift to next substring if there is a repeated char
+                else:
+                    encounteredChars[s[secondChar]] = 1 # add char to dict
+                    length = max(length, secondChar - firstChar + 1) 
+
+        return length # return length of longest substring wihtout repeated chars
