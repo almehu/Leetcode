@@ -18,3 +18,5 @@ class Solution:
             
         return False # return false if value is not repeated in array
     
+        # Alternative one-liner solution (slower but better readability)
+        # return len(set(nums)) < len(nums) # sets don't add duplicates so compare lengths
