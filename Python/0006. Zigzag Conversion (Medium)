@@ -1,0 +1,34 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        zigzagString = ""
+        rows = ["" for i in range(numRows)] # empty list to hold strings for each row
+        
+        firstIncrementor = numRows*2 - 2
+        secondIncrementor = 0
+        
+        if (len(s) == 1 or len(s) == 2 or numRows == 1):
+            return s
+        
+        for i in range(numRows):
+            alternator = 1
+            rowIndex = i  
+                
+            while rowIndex < len(s):
+                # print(rowIndex, " ", end="")
+                rows[i] +=  s[rowIndex]
+                
+                if (i == 0 or i == numRows - 1):
+                    rowIndex += numRows*2 - 2
+                else:
+                    if (alternator % 2 == 0):
+                        rowIndex += secondIncrementor
+                    else:
+                        rowIndex += firstIncrementor
+                    alternator += 1
+ 
+            zigzagString += rows[i]
+            
+            firstIncrementor -= 2
+            secondIncrementor +=2
+        
+        return zigzagString
