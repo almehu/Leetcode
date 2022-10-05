@@ -1,0 +1,35 @@
+"""
+102. BINARY TREE LEVEL ORDER TRAVERSAL
+
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+"""
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        levels = [] # hold level order traversal
+        
+        if root == "null":
+            return levels
+        
+        # Helper function
+        def findLevel(node, level):
+            # Check if node is null
+            if node:
+                # Create new list to hold nodes of a certain level
+                if len(levels) == level:
+                    levels.append([]) # add list for current level
+                levels[level].append(node.val) # add node to current level
+                
+                # Recursively travel down the branches of tree
+                findLevel(node.left, level + 1)
+                findLevel(node.right, level + 1)
+
+        findLevel(root, 0) # call helper function starting with root and level 0
+        
+        return levels # return level order traversal
