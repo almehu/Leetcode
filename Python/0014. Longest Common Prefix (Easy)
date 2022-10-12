@@ -1,0 +1,22 @@
+"""
+14. LONGEST COMMON PREFIX
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+"""
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        # In alphabetical order, compare first and last strings
+        # Alphabetically, all words in between will have the same shared prefix as last
+        first, last = min(strs), max(strs)
+        longestPrefix = "" # str to hold longest prefix
+    
+        for i in range(len(first)):
+            # if char is common between both words, add char to longestPrefix
+            if first[i] == last[i]:
+                longestPrefix += first[i]
+            else: break
+        
+        return longestPrefix
