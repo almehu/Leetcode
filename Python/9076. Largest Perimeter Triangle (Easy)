@@ -1,0 +1,28 @@
+"""
+976. LARGEST PERIMETER TRIANGLE
+
+Given an integer array nums, return the largest perimeter of a triangle with a non-zero area, 
+formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, 
+return 0.
+"""
+
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        # Check if not enough sides to form triangle
+        if len(nums) < 3: 
+            return 0
+        
+        # Reverse sort the list
+        nums.sort(reverse=True)
+        
+        # Triangle logic follows a + b > c
+        for i in range(3, len(nums)+1):
+            c = nums[i-3] # side c of triangle / hypotenuse
+            b = nums[i-2] # side b of triangle
+            a = nums[i-1] # side a of triangle
+            
+            # Check if valid triangle w/ non-zero area
+            if a + b > c:
+                return a + b + c # return perimeter of largest possible triangle 
+        
+        return 0 # If no possible combinations are found
