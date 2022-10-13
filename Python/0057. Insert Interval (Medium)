@@ -1,0 +1,45 @@
+"""
+57. INSERT INTERVAL
+
+You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] 
+represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. 
+You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+
+Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and 
+intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+Return intervals after the insertion.
+"""
+
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        mergedIntervals = [] # create empty list to hold new set of intervals
+        mergedIdx = -1 # start at -1 so appending items start at idx 0
+        
+        # Edge case for empty intervals
+        if len(intervals) == 0:
+            return [newInterval]
+        
+        # Merge intervals in each iteration
+        for x, y in intervals:
+            # Ensure list idx is not out of range so edge case for when list starts empty
+            if len(mergedIntervals) == 0:
+                mergedIdx += 1 # add an additional 1 to idx given that it started at 0
+                a, b = newInterval # split new interval to add into separate elements for readability
+            else:
+                a, b = mergedIntervals[mergedIdx] # split into separate elements for readability
+            
+            # Only delete (replace) if not first element of list
+            if len(mergedIntervals) > 0:
+                del mergedIntervals[mergedIdx]
+
+            # If intervals overlap, merge them
+            if (b >= x and a <= y) or (x >= b and y <= a):
+                mergedIntervals.append([min(x, a), max(y, b)])
+            # If intervals do not overlap, add each to list
+            else:
+                mergedIntervals.append([min(x, a), min(y, b)])
+                mergedIntervals.append([max(x, a), max(y, b)])
+                mergedIdx += 1 # advance idx for appended element (1 is being replaced and 1 added)
+        
+        return mergedIntervals # return new list of merged intervals
