@@ -1,0 +1,31 @@
+"""
+884. UNCOMMON WORDS FROM TWO SENTENCES
+
+A sentence is a string of single-space separated words where each word consists only of lowercase letters.
+
+A word is uncommon if it appears exactly once in one of the sentences, and does not appear in the other sentence.
+
+Given two sentences s1 and s2, return a list of all the uncommon words. You may return the answer in any order.
+"""
+
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        words = {}
+        
+        # Record all words and number of occurrences in first string
+        for word in s1.split():
+            if word in words.keys():
+                words[word] = -1 # increment based on encounter 
+            else:
+                words[word] = 1 # seen once in sentence
+                
+        # Compare words with all words in second string
+        for word in s2.split():
+            if word in words.keys():
+                words[word] = -1 # mark as ineligible
+            else:
+                words[word] = 1
+                
+        uncommonWords = {k: v for k, v in words.items() if v != -1}
+                
+        return uncommonWords
