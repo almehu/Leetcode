@@ -1,0 +1,28 @@
+"""
+1196. How Many Apples Can You Put into the Basket
+
+You have some apples and a basket that can carry up to 5000 units of weight.
+
+Given an integer array weight where weight[i] is the weight of the ith apple, return the maximum number of apples you can put in the basket.
+"""
+
+class Solution:
+    def maxNumberOfApples(self, weight: List[int]) -> int:
+        MAXWEIGHT = 5000 # maximum weight the basket can carry
+        maxApples = 0
+        currentWeight = 0
+        
+        # Check if basket can carry all apples
+        if sum(weight) <= MAXWEIGHT: 
+            return len(weight) 
+        
+        # If total weight exceeds max, add max amount of apples by choosing smallest weights
+        weight.sort() # sort list in increasing order
+        
+        # See if apple can be added to basket
+        for apple in weight:
+            if currentWeight + apple <= MAXWEIGHT:
+                currentWeight += apple
+                maxApples += 1
+            else:
+                return maxApples
