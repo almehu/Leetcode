@@ -1,0 +1,24 @@
+"""
+717. 1-BIT AND 2-BIT CHARACTERS
+
+We have two special characters:
+
+The first character can be represented by one bit 0.
+The second character can be represented by two bits (10 or 11).
+Given a binary array bits that ends with 0, return true if the last character must be a one-bit character.
+"""
+
+class Solution:
+    def isOneBitCharacter(self, bits: List[int]) -> bool:
+        # When list is cut down to last 1 or 2 characters, check with bit characters
+        if bits == [0]: # Check one-bit character left is not 1
+            return True
+        elif bits == [1, 0] or bits == [1, 1]: # Check two-bit character is present for false
+            return False
+        
+        # Assuming valid input of given bit characters, recursive call with altered list
+        if bits[0] == 0:
+            return self.isOneBitCharacter(bits[1:]) # take out one-bit character
+        else:
+            return self.isOneBitCharacter(bits[2:]) # take out two-bit character
+        
