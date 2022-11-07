@@ -1,0 +1,45 @@
+"""
+56. MERGE INTERVALS
+
+Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, 
+and return an array of the non-overlapping intervals that cover all the intervals in the input.
+"""
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        mergedIntervals = [] # create empty list to hold new set of intervals
+        mergedIdx = 0 # idx of new interval set for comparing to intervals list (to merge or not)
+        
+        intervals.sort() # sort intervals based on first element
+        
+        # Edge case for empty intervals
+        if len(intervals) == 0 or len(intervals) == 1:
+            return intervals
+        
+        # Merge intervals in each iteration
+        for idx in range(1, len(intervals)):
+            x, y = intervals[idx]
+            
+            # Grab first element of intervals if first time
+            if len(mergedIntervals) == 0:
+                a, b = intervals[0] # split new interval to add into separate elements for readability
+            else:
+                a, b = mergedIntervals[mergedIdx] # split into separate elements for readability
+            
+            # Only delete (replace) if not first element of list
+            if len(mergedIntervals) > 0:
+                del mergedIntervals[mergedIdx]
+            
+            # If intervals overlap, merge them
+            if (b >= x and a <= y) or (x >= b and y <= a):
+                mergedIntervals.append([min(x, a), max(y, b)])
+                a, b = [min(x, a), max(y, b)] # new first interval is merged interval
+            
+            # If intervals do not overlap, add each to list
+            else:
+                mergedIntervals.append([min(x, a), min(y, b)])
+                mergedIntervals.append([max(x, a), max(y, b)])
+                mergedIdx += 1 # advance idx for appended element (1 is being replaced and 1 added)
+            
+        return mergedIntervals
+    
